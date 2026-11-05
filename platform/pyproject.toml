@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toofast"
+version = "1.2.0"
+description = "2FAST - autonomous stop-flow microfluidic synthesis platform (Bayesian optimisation, UV-Vis kinetics), with a hardware-free simulation mode"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Sylvain David"}]
+dependencies = [
+    "numpy>=1.21",
+    "scipy>=1.7",
+    "scikit-learn>=1.2",
+    "matplotlib>=3.5",
+    "pandas>=1.4",
+    "h5py>=3.0",
+    "pyDOE>=0.3.8",
+    "plotly>=5.0",
+    "python-ternary>=1.0.8",
+    "imageio>=2.9",
+    "mpld3>=0.5",
+]
+
+[project.optional-dependencies]
+# real instruments driven by the package's own serial drivers (C3000 rinse pumps, fraction collector, Bronkhorst MFC)
+serial = ["pyserial>=3.5", "bronkhorst-propar>=1.1"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+toofast = "toofast.gui.app:main"
+toofast-sim = "toofast.simulation.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

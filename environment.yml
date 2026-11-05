@@ -1,0 +1,61 @@
+# Pinned analysis environment (decision 2026-10-09: Python 3.11 / scikit-learn 1.2.2).
+#
+# Mirrors exactly the environment that produced (and re-produced) every figure: the Anaconda 3.11 install
+# C:\tools\Anaconda3 (channel `defaults`, MKL 2023.1 BLAS — builds pinned below) OVERLAID by the user site-packages
+# (AppData\Roaming\Python\Python311), which take precedence there: pandas 1.5.3, pillow 10.2.0, plotly 6.3.0,
+# fonttools 4.53.0, imageio 2.27.0, natsort 8.4.0, xgboost, shap, pyDOE, python-ternary, mpld3 -> pip section.
+#
+# Use it in isolation: set PYTHONNOUSERSITE=1 (otherwise a user site-packages folder leaks into the environment).
+# Checked 2026-10-13: a conda-forge variant of this file installed mkl 2026.1 with a BLAS shim that crashes numpy.linalg
+# (Windows 0xc06d007f) — hence channel `defaults` and the explicit mkl pin.
+name: toofast-pub
+channels:
+  - defaults
+dependencies:
+  - python=3.11.5=he1021f5_0
+  - mkl=2023.1.0
+  - intel-openmp=2023.1.0
+  - blas=1.0=mkl
+  - numpy=1.26.2=py311hdab7c0b_0
+  - scipy=1.11.4=py311hc1ccb85_0
+  - scikit-learn=1.2.2=py311hd77b12b_1
+  - threadpoolctl=2.2.0
+  - h5py=3.9.0=py311h4e0e482_0
+  - hdf5=1.12.1
+  - matplotlib=3.8.0=py311haa95532_0
+  - matplotlib-base=3.8.0=py311hf62ec03_0
+  - freetype=2.12.1
+  - kiwisolver=1.4.4
+  - joblib=1.2.0
+  - openpyxl=3.0.10
+  - seaborn=0.12.2
+  - statsmodels=0.14.0
+  - numba=0.58.1
+  - llvmlite=0.41.0
+  - pyyaml=6.0.1
+  - tqdm=4.65.0
+  - jupyterlab=4.0.8
+  - ipykernel=6.25.0
+  - nbconvert=7.10.0
+  - nbclient=0.8.0
+  - nbformat=5.9.2
+  - pytest=7.4.0
+  - pip
+  - pip:
+      - pandas==1.5.3
+      - pillow==10.2.0
+      - plotly==6.3.0
+      - fonttools==4.53.0
+      - imageio==2.27.0
+      - natsort==8.4.0
+      - pyDOE==0.3.8
+      - python-ternary==1.0.8
+      - mpld3==0.5.11
+      - xgboost==3.1.1
+      - shap==0.49.1
+      # imported at module level by the platform snapshot driven by S15 (third_party/toofast); same versions as the
+      # reference user site-packages (added 2026-10-15: S15 had not been re-run in the clean environment)
+      - pyserial==3.5
+      - bronkhorst-propar==1.1.1
+# Not in the reference install although imported by some 2FAST_ML scripts: umap-learn (descriptor_analysis.py) — not
+# needed by any figure of the paper.

@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toofast_analysis"
+version = "0.1.0"
+description = "Analysis code for the 2FAST publication (stop-flow AgNP synthesis)"
+requires-python = "==3.11.*"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
